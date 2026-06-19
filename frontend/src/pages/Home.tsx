@@ -1,5 +1,6 @@
 //import React from 'react'
 import  ProductCard  from '../components/ProductCard';
+
 import type { Product } from '../types/store.types';
 
 // Mock data mirroring FakeStoreAPI response format

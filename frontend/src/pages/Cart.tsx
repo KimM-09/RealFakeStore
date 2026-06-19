@@ -1,5 +1,6 @@
 import { useCart } from '../context/CartContext';
 import { Trash2 } from 'lucide-react';
+import { Link } from 'react-router';
 
 
 const Cart = () => {
@@ -11,9 +12,10 @@ const Cart = () => {
                 <div className='text-6xl mb-4'>
                     <h2 className='text-2xl font-bold text-gray-900'>Your cart is empty</h2>
                     <p className='text-gray-500 mt-2'>Looks like you haven't added anything to your store yet</p>
-                    <button className='mt-6 inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors'>
+                    <Link to="/" ><button className='mt-6 inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors'>
                         Continue Shopping
                     </button>
+                    </Link>
                 </div>
             </main>
         );
@@ -40,7 +42,7 @@ const Cart = () => {
                     <div className='ml-4 flex flex-1 flex-col sm:ml-6'>
                         <div className='flex justify-between items-start'>
                             <h3 className='text-sm font-medium text-gray-900 line-clamp-2 max-w[70%]'>
-                                item.title
+                                {item.title}
                             </h3>
                             <p className='ml-4 text-sm font-semibold text-gray-900'>
                                 ${(item.price * item.quantity).toFixed(2)}

@@ -1,6 +1,7 @@
 //import React from 'react'
 import { ShoppingCart } from "lucide-react";
 import { useCart } from "../context/CartContext"
+import { Link } from 'react-router';
 
 const Navbar = () => {
     const { cart } = useCart();
@@ -22,7 +23,7 @@ const Navbar = () => {
                         Products
                     </span>
                     {/*cart button */}
-                    <button className="relative p-2 text-gray-600 hover:text-indigo-600 transition-colors focus:outline-none">
+                    <Link to="/cart"><button className="relative p-2 text-gray-600 hover:text-indigo-600 transition-colors focus:outline-none">
                         {/*Replace with lucide icon*/}
                         <ShoppingCart className="w-6 h-6" />
 {/* <svg
@@ -44,7 +45,7 @@ const Navbar = () => {
                                 {totalItems}
                             </span>
                           )}
-                    </button>
+                    </button></Link>
                 </div>
             </div>
         </div>
