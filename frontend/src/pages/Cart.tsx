@@ -11,7 +11,7 @@ const Cart = () => {
             <main className='max-w-3xl mx-auto px-4 py-16 text-center'>
                 <div className='text-6xl mb-4'>
                     <h2 className='text-2xl font-bold text-gray-900'>Your cart is empty</h2>
-                    <p className='text-gray-500 mt-2'>Looks like you haven't added anything to your store yet</p>
+                    <p className='text-gray-500 mt-2'>Looks like you haven't added anything to your cart yet</p>
                     <Link to="/" ><button className='mt-6 inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-colors'>
                         Continue Shopping
                     </button>
