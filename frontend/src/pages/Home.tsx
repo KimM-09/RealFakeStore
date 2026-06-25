@@ -70,7 +70,7 @@ const Home = () => {
     return(
       <div className='flex flex-col items-center justify-center min-h-[50vh] space-y-4'>
         <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600'></div>
-        <p className='text-gray-500 text-sm font-medium'>Fetching the store catalog...</p>
+        <p className='text-primary-text text-sm font-medium'>Fetching the store catalog...</p>
       </div>
     );
   }
@@ -88,10 +88,10 @@ const Home = () => {
 
 
   return (
-    <main className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
-      <div className='border-b border-gray-200 pb-5 mb-8'>
-        <h1 className='text-3xl font-bold tracking-tight text-gray-900'>Trending Products</h1>
-        <p className='mt-2 text-sm text-gray-500'>Explore our collection of real fake items built completely with TypeScript</p>
+    <main className='bg-secondary-background dark:bg-dark-secondary-background max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
+      <div className='border-b border-primary-border dark:border-dark-primary-border pb-5 mb-8'>
+        <h1 className='text-3xl lg:text-6xl font-bold tracking-tight text-primary-text dark:text-dark-primary-text'>Trending Products</h1>
+        <p className='mt-2 text-sm text-primary-text dark:text-dark-primary-text'>Explore our collection of real fake items built completely with TypeScript</p>
       </div>
       <div className='grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
         {products.map(product => (
