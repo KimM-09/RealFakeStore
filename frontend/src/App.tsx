@@ -11,13 +11,15 @@ const App = () => {
   return (
     <div>
       <CartProvider>
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen flex flex-col bg-primary-background">
           <Navbar />
+          <div className="flex-1">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/product/:id" element={<ProductDetails />} />
             </Routes>
+          </div>
             <Footer />
         </div>
       </CartProvider>

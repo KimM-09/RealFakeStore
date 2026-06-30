@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -6,9 +7,16 @@
     --color-primary-background: #e9ecef;
     --color-secondary-background: #f8f9fa;
     --color-accent: #3a6ea5;
+    --color-accent-hover: #004e98;
+    --color-error: #a4161a;
+    --color-error-hover: #660708;
+    --color-success: #17873c;
+    --color-success-hover: #0b6623;
     /*Dark Mode Colors*/
     --color-dark-primary-text: #f8f9fa;
     --color-dark-primary-border: #495057;
     --color-dark-primary-background: #212529;
     --color-dark-secondary-background: #343a40;
+
+    --font-family-primary: 'Spicy Rice', cursive;
 }

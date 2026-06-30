@@ -13,21 +13,21 @@ const Navbar = () => {
             <div className="flex justify-between h-16 items-center">
                 {/*Logo & brand name */}
                 <div className="shrink-0 flex items-center">
-                    <span className="text-xl font-bold tracking-tight text-primary-text dark:text-dark-primary-text cursor-pointer">
-                        <Link to="/">Real Fake Store</Link>
+                    <span className="text-2xl font-family-primary tracking-widest text-primary-text dark:text-dark-primary-text cursor-pointer">
+                        <Link to="/"><span className="text-5xl">R</span>eal <span className="text-5xl">F</span>ake <span className="text-5xl">S</span>tore</Link>
                     </span>
                 </div>
                 {/*Nav links and cart icon*/}
                 <div className="flex items-center space-x-8">
-                    <span className="text-primary-text dark:text-dark-primary-text hover:text-indigo-600 font-meduim transition-colors cursor-pointer">
+                    {/* <span className="text-primary-text dark:text-dark-primary-text hover:text-accent-hover font-medium transition-colors cursor-pointer">
                         <Link to="/">Products</Link>
-                    </span>
+                    </span> */}
                     {/*cart button */}
-                    <Link to="/cart"><button className="relative p-2 text-primary-text dark:text-dark-primary-text hover:text-indigo-600 transition-colors focus:outline-none cursor-pointer">
+                    <Link to="/cart"><button className="relative p-2 text-primary-text dark:text-dark-primary-text transition-colors focus:outline-none cursor-pointer">
                         {/*Replace with lucide icon*/}
                         <ShoppingCart className="w-6 h-6" />
                           {totalItems > 0 && (
-                            <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-rose-500 rounded-full animate-fade-in">
+                            <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-error rounded-full animate-fade-in">
                                 {totalItems}
                             </span>
                           )}
