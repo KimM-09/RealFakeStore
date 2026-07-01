@@ -3,7 +3,6 @@ import { Trash2 } from 'lucide-react';
 import { Link } from 'react-router';
 
 
-
 const Cart = () => {
     const { cart, updateQuantity, removeFromCart, cartTotal, clearCart } = useCart();
 
