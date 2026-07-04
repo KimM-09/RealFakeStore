@@ -1,3 +1,19 @@
+export interface UserProfile {
+    id: string;
+    username: string;
+    email: string;
+}
+
+export interface AuthContextType {
+    user: UserProfile | null;
+    token: string | null;
+    isLoading: boolean;
+    error: string | null;
+    loginUser: (email: string, password: string) => Promise<boolean>;
+    registerUser: (username: string, email: string, password: string) => Promise<boolean>;
+    logoutUser: () => void;
+}
+
 export interface Rating {
     rate: number;
     count: number;
@@ -26,3 +42,4 @@ export interface CartContextType {
     clearCart: () => void;
     cartTotal: number;
 }
+
