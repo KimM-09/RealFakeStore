@@ -19,9 +19,9 @@ const Navbar = () => {
                 </div>
                 {/*Nav links and cart icon*/}
                 <div className="flex items-center space-x-8">
-                    {/* <span className="text-primary-text dark:text-dark-primary-text hover:text-accent-hover font-medium transition-colors cursor-pointer">
-                        <Link to="/">Products</Link>
-                    </span> */}
+                    <span className="text-primary-text dark:text-dark-primary-text hover:text-accent-hover font-medium transition-colors cursor-pointer">
+                        <Link to="/login">Login</Link>
+                    </span>
                     {/*cart button */}
                     <Link to="/cart"><button className="relative p-2 text-primary-text dark:text-dark-primary-text transition-colors focus:outline-none cursor-pointer">
                         {/*Replace with lucide icon*/}

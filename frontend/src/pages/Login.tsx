@@ -10,7 +10,7 @@ const { loginUser, error } = useAuth();
 const navigate = useNavigate();
 const [submitting, setSubmitting] = useState(false);
 
-const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
 
@@ -23,7 +23,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 };
 
   return (
-      <main className='flex md:w-full md:min-h-[50vh] min-h-[75vh] justify-center px-6 py-12 lg:px-8 bg-primary-background text-primary-text dark:bg-dark-primary-background dark:text-dark-primary-text'>
+      <main className='flex min-h-[85vh] flex-col justify-center px-6 py-12 lg:px-8 bg-primary-background text-primary-text dark:bg-dark-primary-background dark:text-dark-primary-text'>
         <div className='md:w-96 mx-auto w-full max-w-full bg-secondary-background p-8 rounded-xl border border-primary-border shadow-sm'>
             <h2 className='text-center text-2xl font-bold leading-9 tracking-tight text-primary-text mb-6'>
                 Sign In To Your Account
