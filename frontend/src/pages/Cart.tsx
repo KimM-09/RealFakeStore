@@ -1,10 +1,75 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { useCart } from '../context/CartContext';
-import { Trash2 } from 'lucide-react';
-import { Link } from 'react-router';
-
+import { useAuth } from '../context/AuthContext';
+import { PartyPopper, Trash2, TriangleAlert } from 'lucide-react';
 
 const Cart = () => {
     const { cart, updateQuantity, removeFromCart, cartTotal, clearCart } = useCart();
+    const { user, token } = useAuth();
+    const navigate = useNavigate();
+
+    const [isCheckingOut, setIsCheckingOut] = useState<boolean>(false);
+    const [checkoutMessage, setCheckoutMessage] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    // const [isLoadingCheckout, setIsLoadingCheckout] = useState<boolean>(false);
+
+    const handleCheckout = async () => {
+        if(!user || !token) {
+            setErrorMessage('You must be signed in to place an order.');
+            setTimeout(()=> navigate('/login'), 2000);
+            return;
+        }
+
+        try {
+            setIsCheckingOut(true);
+            setErrorMessage(null);
+
+            const response = await fetch('http://localhost:5001/api/orders/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ cartItems: cart})
+            });
+
+            const data = await response.json();
+
+            if(!response.ok){
+                throw new Error(data.message || 'Something went wrong during checkout.');
+            }
+
+            setCheckoutMessage(data.message);
+
+            setTimeout(() => {
+                clearCart();
+                navigate('/');
+            }, 4000)
+        } catch (error) {
+            setErrorMessage((error as Error).message);
+        } finally {
+            setIsCheckingOut(false);
+        }
+    };
+
+    if(checkoutMessage) {
+        return (
+            <main className='max-w-3xl mx-auto px-4 py-24 text-center animate-fade-in'>
+                <div className='text-6xl mb-6 flex justify-center items-center gap-4 text-success'>
+                <PartyPopper />
+                <h2 className='text-3xl font-extrabold text-primary-text'>Order Confirmed!</h2>
+                </div>
+                <div className='flex flex-col items-center justify-center mt-4 gap-4'>
+                <p className='text-success font-medium mt-4 text-lg bg-emerald-50 py-3 px-5 rounded-lg inline-block'>
+                    {checkoutMessage}
+                </p>
+                <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-success'></div>
+                </div>
+                <p className='text-gray-400 text-sm mt-6'>Redirecting you back to the home page...</p>
+            </main>
+        );
+    }
 
     if(cart.length === 0) {
         return (
@@ -12,10 +77,12 @@ const Cart = () => {
                 <div className='text-6xl mb-4'>
                     <h2 className='text-2xl font-bold text-gray-900'>Your cart is empty</h2>
                     <p className='text-gray-500 mt-2'>Looks like you haven't added anything to your cart yet</p>
-                    <Link to="/" ><button className='mt-6 inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent-hover transition-colors'>
+                    <button 
+                    onClick={() => navigate('/')}
+                    className='mt-6 inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent-hover transition-colors cursor-pointer'>
                         Continue Shopping
                     </button>
-                    </Link>
+                    
                 </div>
             </main>
         );
@@ -24,6 +91,12 @@ const Cart = () => {
   return (
     <main className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
       <h1 className='text-3xl font-bold tracking-tight text-gray-900 mb-8'>Shopping Cart</h1>
+
+      {errorMessage && (
+        <div className="mb-6 rounded-md bg-rose-50 border border-rose-200 p-4 text-sm text-rose-700">
+          <TriangleAlert /> {errorMessage}
+        </div>
+      )}
 
       <div className='grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-10'>
 
@@ -89,10 +162,12 @@ const Cart = () => {
                 className='mt-6 inline-flex items-center justify-center rounded-md bg-error px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-error-hover transition-colors cursor-pointer'>
                     Clear entire cart
             </button>
-            <Link to="/"><button className='mt-6 inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent-hover transition-colors cursor-pointer'>
+            <button 
+                onClick={() => navigate('/')}
+                className='mt-6 inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent-hover transition-colors cursor-pointer'>
                         Continue Shopping
-                          </button>
-            </Link>
+            </button>
+            
             </div>
         </section>
 
@@ -118,8 +193,12 @@ const Cart = () => {
                     </div>
                 </dl>
             </div>
-            <button className='mt-6 w-full rounded-md bg-success px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-success-hover transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 cursor-pointer'>
-                Proceed to Checkout
+
+            <button 
+            onClick={handleCheckout}
+            disabled={isCheckingOut}
+            className='mt-6 w-full rounded-md bg-success px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-success-hover transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 cursor-pointer'>
+                { isCheckingOut ? 'Processing Order...' : 'Proceed to Checkout'}
             </button>
         </section>
       </div>

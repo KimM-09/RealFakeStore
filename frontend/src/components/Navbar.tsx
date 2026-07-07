@@ -1,10 +1,12 @@
 //import React from 'react'
 import { ShoppingCart } from "lucide-react";
-import { useCart } from "../context/CartContext"
+import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 import { Link } from 'react-router';
 
 const Navbar = () => {
     const { cart } = useCart();
+    const { user, logoutUser } = useAuth();
     //Calculate the total number of items
     const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
   return (
@@ -19,9 +21,17 @@ const Navbar = () => {
                 </div>
                 {/*Nav links and cart icon*/}
                 <div className="flex items-center space-x-8">
+                {user ? (
+                    <>
+                    <span className="text-primary-text dark:text-dark-primary-text font-medium">Welcome, {user.username}!</span>
+                    <Link to='/'><button className="text-primary-text dark:text-dark-primary-text hover:text-accent-hover font-medium transition-colors cursor-pointer" onClick={logoutUser}>Logout</button></Link>
+                    </>
+                    
+                ): (
                     <span className="text-primary-text dark:text-dark-primary-text hover:text-accent-hover font-medium transition-colors cursor-pointer">
-                        <Link to="/login">Login</Link>
+                       <Link to="/login">Login</Link>
                     </span>
+                )}
                     {/*cart button */}
                     <Link to="/cart"><button className="relative p-2 text-primary-text dark:text-dark-primary-text transition-colors focus:outline-none cursor-pointer">
                         {/*Replace with lucide icon*/}

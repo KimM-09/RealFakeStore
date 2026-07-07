@@ -117,7 +117,7 @@ const ProductDetails = () => {
                                 <p className='text-3xl font-bold text-success'>${product?.price.toFixed(2)}</p>
                             </div>
 
-                            <button onClick={() => addToCart(product)} className='rounded-md bg-accent px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-accent-hover transition-colors focus:outline-none'>
+                            <button onClick={() => addToCart(product)} className='rounded-md bg-accent px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-accent-hover transition-colors focus:outline-none cursor-pointer'>
                                 Add to Cart
                             </button>
                         </div>

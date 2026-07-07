@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const loginUser = async (email: string, password: string): Promise<boolean> => {
         setError(null);
         try {
-            const response = await fetch('http://localhost:5001/api/auth/Login', {
+            const response = await fetch('http://localhost:5001/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })

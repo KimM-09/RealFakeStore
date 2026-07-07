@@ -39,7 +39,7 @@ export const authController = {
             });
 
             res.status(201).json({
-                token: generateToken(newUser.id as string), //removed the _ from infront of id - may be a problem - will find out
+                token: generateToken(newUser._id.toString()), //removed the _ from infront of id - may be a problem - will find out
                 user: {
                     id: newUser._id,
                     username: newUser.username,
@@ -77,7 +77,7 @@ export const authController = {
             }
 
             res.status(200).json({
-                token: generateToken(user.id as string),//removed the _ from infront of id - may be a problem - will find out
+                token: generateToken(user._id.toString()),//removed the _ from infront of id - may be a problem - will find out
                 user: {
                     id: user._id,
                     username: user.username,
