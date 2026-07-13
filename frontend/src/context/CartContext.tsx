@@ -21,7 +21,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
             if (existingItem) {
                 return prevCart.map((item) => 
-                    item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item );
+                    item.id === product.id ? { ...item, quantity: Math.min(item.quantity + 1, 15) } : item );
             }
             return [...prevCart, { ...product, quantity: 1 }];
         });
@@ -38,7 +38,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
             removeFromCart(productId);
             return;
         }
-        setCart((prevCart) => prevCart.map((item) => item.id === productId ? { ...item, quantity } : item ));
+        setCart((prevCart) => prevCart.map((item) => item.id === productId ? { ...item, quantity: Math.min(quantity, 15) } : item ));
     };
 
     //6. Reset cart state

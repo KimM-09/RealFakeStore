@@ -8,11 +8,13 @@ import { Star, TriangleAlert } from 'lucide-react';
 const ProductDetails = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
-    const { addToCart } = useCart();
+    const { cart, addToCart, updateQuantity } = useCart();
 
     const [product, setProduct ] = useState<Product | null>(null);
     const [isLoading, setIsLoading ] = useState<boolean>(true);
     const [ error, setError ] = useState<string | null>(null);
+
+    const currentQuantity = cart.find((item) => item.id === Number(id))?.quantity ?? 0;
 
     useEffect(() => {
         const loadSingleProduct = async () => {
@@ -117,9 +119,32 @@ const ProductDetails = () => {
                                 <p className='text-3xl font-bold text-success'>${product?.price.toFixed(2)}</p>
                             </div>
 
-                            <button onClick={() => addToCart(product)} className='rounded-md bg-accent px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-accent-hover transition-colors focus:outline-none cursor-pointer'>
-                                Add to Cart
-                            </button>
+                            {currentQuantity > 0 ? (
+                                <div className='flex items-center overflow-hidden rounded-md border border-gray-300 bg-white shadow-sm'>
+                                    <button
+                                        onClick={() => updateQuantity(product.id, currentQuantity - 1)}
+                                        className='flex h-12 w-12 items-center justify-center text-xl font-semibold text-gray-700 transition-colors hover:bg-gray-100 cursor-pointer'
+                                        aria-label={`Decrease quantity of ${product.title}`}
+                                    >
+                                        −
+                                    </button>
+                                    <span className='min-w-12 px-3 text-center text-base font-semibold text-gray-900'>
+                                        {currentQuantity}
+                                    </span>
+                                    <button
+                                        onClick={() => updateQuantity(product.id, currentQuantity + 1)}
+                                        disabled={currentQuantity >= 15}
+                                        className='flex h-12 w-12 items-center justify-center text-xl font-semibold text-gray-700 transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer'
+                                        aria-label={`Increase quantity of ${product.title}`}
+                                    >
+                                        +
+                                    </button>
+                                </div>
+                            ) : (
+                                <button onClick={() => addToCart(product)} className='rounded-md bg-accent px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-accent-hover transition-colors focus:outline-none cursor-pointer'>
+                                    Add to Cart
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -17,7 +17,6 @@ router.post('/checkout', protect, async (req: AuthenticatedRequest, res: Respons
         if(!cartItems || cartItems.length === 0) {
             return res.status(400).json({ message: 'Cannot checkout an empty shopping cart.' });
         }
-        console.log(`Order Received! User ${userId} successfully ordered ${cartItems.length} items.`);
 
         return res.status(200).json({
             success: true,

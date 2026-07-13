@@ -12,7 +12,6 @@ const Cart = () => {
     const [isCheckingOut, setIsCheckingOut] = useState<boolean>(false);
     const [checkoutMessage, setCheckoutMessage] = useState<string | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    // const [isLoadingCheckout, setIsLoadingCheckout] = useState<boolean>(false);
 
     const handleCheckout = async () => {
         if(!user || !token) {
@@ -131,6 +130,7 @@ const Cart = () => {
                                 <button
                                     onClick={() => updateQuantity(item.id, item.quantity - 1)}
                                     className='px-3 py-1 text-gray-600 hover:bg-gray-100 transition-colors text-lg'
+                                    disabled={item.quantity <= 1}
                                 >
                                     -
                                 </button>
@@ -140,6 +140,7 @@ const Cart = () => {
                                 <button
                                     onClick={() => updateQuantity(item.id, item.quantity + 1)}
                                     className='px-3 py-1 text-gray-600 hover:bg-gray-100 transition-colors text-lg'
+                                    disabled={item.quantity >= 15}
                                 >
                                     +
                                 </button>

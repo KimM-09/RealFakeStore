@@ -65,6 +65,14 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 >
                     {submitting ? 'Signing In...' : 'Sign In'}
                 </button>
+                <div>
+                <p className='text-primary-text text-sm font-medium'>Don't have an account?</p>
+                <button 
+                    onClick={() => navigate('/register')}
+                    className='text-sm font-semibold text-accent hover:text-accent-hover focus-visible:outline-2 transition-colors cursor-pointer'>
+                    Register
+                </button>
+                </div>
             </form>
         </div>
       </main>
