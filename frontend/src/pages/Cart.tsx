@@ -12,6 +12,7 @@ const Cart = () => {
     const [isCheckingOut, setIsCheckingOut] = useState<boolean>(false);
     const [checkoutMessage, setCheckoutMessage] = useState<string | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
     const handleCheckout = async () => {
         if(!user || !token) {
@@ -24,7 +25,7 @@ const Cart = () => {
             setIsCheckingOut(true);
             setErrorMessage(null);
 
-            const response = await fetch('http://localhost:5001/api/orders/checkout', {
+            const response = await fetch(`${API_URL}/api/orders/checkout`, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',

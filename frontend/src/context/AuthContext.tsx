@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [token, setToken] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
     useEffect(() => {
         const storedToken = localStorage.getItem('fake_store_token');
@@ -24,7 +25,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const loginUser = async (email: string, password: string): Promise<boolean> => {
         setError(null);
         try {
-            const response = await fetch('http://localhost:5001/api/auth/login', {
+            const response = await fetch(`${API_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
@@ -49,7 +50,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const registerUser = async (username: string, email: string, password: string): Promise<boolean> => {
         setError(null);
         try {
-            const response = await fetch('http://localhost:5001/api/auth/register', {
+            const response = await fetch(`${API_URL}/api/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({ username, email, password })
